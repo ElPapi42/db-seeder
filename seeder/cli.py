@@ -5,31 +5,10 @@ import typer
 from seeder import settings
 from seeder.mongo import db
 from seeder.users import generate_user
+from seeder.companies import generate_company
 
 
 app = typer.Typer()
-
-def generate_company():
-    """Generates random data for a dummy company."""
-    companies = [
-        'Ala Delta',
-        'Next Evo',
-        'Dummy File',
-        'Dummy Lol'
-    ]
-
-    addresses = [
-        'Calle 15',
-        'Calle 16',
-        'Calle 17',
-        'Calle 18'
-    ]
-
-    return {
-        'name': random.choice(companies),
-        'nit': random.randint(100000, 999999),
-        'address': random.choice(addresses),
-    }
 
 @app.command()
 def seeddb():
