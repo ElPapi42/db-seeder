@@ -1,6 +1,7 @@
 import random
 
 import typer
+import pymongo
 
 from seeder import settings
 from seeder.mongo import db
@@ -20,6 +21,9 @@ def seeddb():
 
     # collection for users
     users = db.users
+
+    # An index for ensure user emails are unique
+    users.create_index([('email', pymongo.ASCENDING)], unique=True)
 
     for company in new_companies.inserted_ids:
 

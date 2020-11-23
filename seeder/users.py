@@ -1,4 +1,5 @@
 import random
+from uuid import uuid4
 
 from passlib.context import CryptContext
 
@@ -26,6 +27,7 @@ NAMES = [
 def generate_user(company):
     """Generate a dummy user registered on the supplied company."""
     name = random.choice(NAMES)
+    name = f'{name}:{str(uuid4())[:8]}'
 
     return {
         'email': f'{name}@gmail.com',
