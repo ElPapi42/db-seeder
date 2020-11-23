@@ -1,11 +1,14 @@
-import typer
 import random
+
+import typer
+from passlib.context import CryptContext
 
 from seeder import settings
 from seeder.mongo import db
 
 
 app = typer.Typer()
+pass_hasher = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def generate_company():
     """Generates random data for a dummy company."""
@@ -29,6 +32,31 @@ def generate_company():
         'address': random.choice(addresses),
     }
 
+def generate_user(company):
+    """Generate a dummy user registered on the supplied company."""
+    names = [
+        'alberto',
+        'jose',
+        'whitman',
+        'pablo',
+        'ruso'
+    ]
+
+    name = random.choice(names)
+
+    return {
+        'email': f'{name}@gmail.com',
+        'password': pass_hasher.hash(name),
+        'company_id': company,
+        'profile': {
+            'name': name,
+            'last_name': name[::-1],
+            'age': random.randint(19, 23),
+            'gender': 'M' if random.randint(0, 1) else 'F',
+            'document_number': str(random.randint(26493929, 31456896))
+        },
+    }
+
 @app.command()
 def seeddb():
     # Mongo collection for companies
@@ -40,5 +68,5 @@ def seeddb():
     users = db.users
 
     for company in new_companies:
-        typer.echo(company)
 
+        typer.echo(generate_user(company))
