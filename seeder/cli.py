@@ -1,8 +1,14 @@
 import typer
 
+from pymongo import MongoClient
+
+from seeder import settings
+
+MongoClient()
+
 
 app = typer.Typer()
 
 @app.command()
-def seedusers(name: str):
-    typer.echo(f"Hello {name}")
+def seedusers():
+    typer.echo(f"{settings.DB_URL}")
