@@ -1,7 +1,4 @@
-import typer
-
-import seeder
-
+from seeder import cli
 
 if __name__ == "__main__":
-    typer.run(seeder.main)
+    cli.app()

@@ -15,5 +15,5 @@ services:
   seeder-cli:
     build: .
     image: seeder-cli
-    container_name: seeder-cli
     tty: true
+    container_name: seeder-cli
