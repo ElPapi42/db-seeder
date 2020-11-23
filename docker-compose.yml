@@ -1,0 +1,19 @@
+version: "3.7"
+services:
+
+  seeder-mongo:
+    image: mongo:latest
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data/mongo:/data/db
+    container_name: seeder-mongo
+
+  seeder-cli:
+    build: .
+    image: seeder-cli
+    container_name: seeder-cli
+    tty: true
