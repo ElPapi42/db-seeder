@@ -1,4 +1,5 @@
 import random
+from uuid import uuid4
 
 
 COMPANIES = [
@@ -30,7 +31,7 @@ ADDRESSES = [
 def generate_company():
     """Generates random data for a dummy company."""
     return {
-        'name': random.choice(COMPANIES),
+        'name': f'{random.choice(COMPANIES)} {str(uuid4())[:8]}',
         'nit': random.randint(1000000, 9999999),
         'address': random.choice(ADDRESSES),
     }
