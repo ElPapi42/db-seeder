@@ -7,7 +7,7 @@ For seed the Database with dummy records and an admin:
 ```bash
 sudo docker-compose up -d --build
 docker exec seeder-cli python seeder seeddb
-docker exec seeder-cli python seeder createadmin
+docker exec -it seeder-cli python seeder createadmin
 ```
 
 This cli has no other applications.
